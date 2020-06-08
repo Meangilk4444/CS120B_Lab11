@@ -17,8 +17,108 @@
 #include "io.c"
 #endif
 
-enum lcdPrint_states{Init};
+enum keypad_states{Init};
 
+int keypad_tick(int keypad_state)
+{
+	//unsigned char k = 0x00;
+	unsigned char key = 0x00; 
+	key = GetKeypadKey();
+
+	switch(keypad_state)
+	{
+		case Init:
+			keypad_state = Init;
+			break;
+
+		default:
+			keypad_state = Init;
+			break;
+	}
+
+	switch(keypad_state)
+	{
+		case Init:
+			
+			switch(key)
+			{
+				case '\0':
+                  			PORTB = 0x1F;
+                  			break;
+
+				case '0':
+					PORTB = 0x00;
+					break;
+
+                  		case '1':
+                  			PORTB = 0x01;
+                  			break;
+
+                  		case '2':
+                  			PORTB = 0x02;
+                  			break;
+
+                  		case '3':
+                  			PORTB = 0x03;
+                  			break;
+
+                  		case '4':
+                  			PORTB = 0x04;
+                  			break;
+
+                  		case '5':
+                  			PORTB = 0x05;
+                  			break;
+
+                  		case '6':
+                  			PORTB = 0x06;
+                  			break;
+
+                  		case '7':
+                  			PORTB = 0x07;
+                  			break;
+
+                  		case '8':
+                  			PORTB = 0x08;
+                  			break;
+
+                  		case '9':
+                  			PORTB = 0x09;
+                  			break;
+
+                  		case 'A':
+                  			PORTB = 0x0A;
+                  			break;
+
+                  		case 'B':
+                  			PORTB = 0x0B;
+                  			break;
+
+                  		case 'C':
+                  			PORTB = 0x0C;
+                  			break;
+
+                  		case 'D':
+                  			PORTB = 0x0D;
+                  			break;
+
+                  		case '*':
+                  			PORTB = 0x0E;
+                  			break;
+
+                  		case '#':
+                  			PORTB = 0x0F;
+                  			break;
+
+				default:
+					PORTB = 0x1B;
+					break;
+			}
+	break;
+	}
+
+	return keypad_state;
+}
 
 //unsigned long int findGCD(unsigned long int a, unsigned long int b)
 //{
