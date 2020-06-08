@@ -18,37 +18,7 @@
 #endif
 
 enum lcdPrint_states{Init};
-unsigned char scroll;
 
-const unsigned char M[43] = {' ', ' ', ' ', 'C', 'S', '1', '2', '0','B', ' ', 'i', 's', ' ', 'L', 'e', 'g', 'e', 'n', 'd', '.', '.', '.', ' ', 'w', 'a', 'i', 't', ' ', 'f', 'o', 'r', ' ', 'i', 't', ' ', 'D', 'A', 'R', 'Y', '!', ' ', ' ', ' '}; 
-int LCD_PRINT_TASK(int lcdPrint_state)
-{
-	switch(lcdPrint_state)
-	{
-		case Init:
-			for(unsigned char i = 0; i <= 16; i++)
-			{
-				LCD_Cursor(i);
-				LCD_WriteData(M[scroll+i -2]);
-				if(scroll + i + 1 == 43)
-				{
-					scroll = 1;
-				}
-
-			}
-
-			scroll++;
-			lcdPrint_state = Init;
-			break;
-
-		default:
-			lcdPrint_state = Init;
-			break;
-	}
-
-	return lcdPrint_state;
-
-}
 
 //unsigned long int findGCD(unsigned long int a, unsigned long int b)
 //{
