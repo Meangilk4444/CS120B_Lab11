@@ -13,6 +13,7 @@
 #include "timer.h"
 #include "scheduler.h"
 #include "keypad.h"
+
 #include "io.c"
 #endif
 
@@ -46,6 +47,7 @@ int LCD_PRINT_TASK(int lcdPrint_state)
 	}
 
 	return lcdPrint_state;
+
 }
 
 //unsigned long int findGCD(unsigned long int a, unsigned long int b)
@@ -66,6 +68,7 @@ int main(void) {
     /* Insert DDR and PORT initializations */
 	DDRB = 0xFF;	PORTB = 0x00;
 	DDRD = 0xFF;	PORTC = 0x00;
+
     /* Insert your solution below */
 
 	static task task1;
@@ -88,6 +91,8 @@ int main(void) {
 
 	LCD_init();
 
+//	task1.TickFct =  &keypad_tick;
+
     while (1) {
 	
 	    for(unsigned short j = 0; j < numTasks; j++)
@@ -96,7 +101,9 @@ int main(void) {
 			    tasks[j]->state = tasks[j]->TickFct(tasks[j]->state);
 			    tasks[j]->elapsedTime = 0;
 		    }
+
 		    tasks[j]->elapsedTime += 1;
+
 	    }
 	    while(!TimerFlag);
 	    TimerFlag = 0;
